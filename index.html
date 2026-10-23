@@ -65,6 +65,9 @@ a{color:inherit}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font:600 16px/1 var(--body);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .15s, background .15s}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:var(--accent);color:var(--accent-ink)}
+@media (max-width:899px){.hero h1,.hero p.lede,.hero .eyebrow{text-shadow:0 2px 14px rgba(0,0,0,.55)}}
+@media (min-width:900px){.hero p.lede{max-width:44ch}}
+.hero-cta{padding:16px 30px;font-size:17px;box-shadow:0 12px 28px -14px rgba(0,0,0,.6)}
 .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
 .btn-outline{border-color:var(--line);color:var(--ink);background:transparent}
 
@@ -284,10 +287,10 @@ footer .logo{color:var(--ink)}
 <img class="hero-img" src="hero.jpg" alt="Beach wedding ceremony with a white arch facing the sea">
 <div class="wrap">
 <div class="eyebrow">Destination Wedding · Cyprus 2027</div>
-<h1><span data-l="en">A Cyprus destination wedding, planned to the last detail</span></h1>
-<p class="lede"><span data-l="en">We guide you from day one: choosing the venue, building the budget, coordinating the hotel and vendors, and producing every day of the stay, so you can simply enjoy it.</span></p>
+<h1><span data-l="en">Your Dream Beachfront Wedding in Cyprus</span></h1>
+<p class="lede"><span data-l="en">Three unforgettable days. Your favourite people. One beautiful Mediterranean destination. Everything taken care of.</span></p>
 <div class="ctas">
-<a class="btn btn-primary" href="#calculator"><span data-l="en">Calculate your price</span></a>
+<a class="btn btn-primary hero-cta" href="#calculator"><span data-l="en">Calculate Your Wedding Price</span></a>
 <a class="btn btn-ghost" href="#included"><span data-l="en">What's included</span></a>
 </div>
 </div>
