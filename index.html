@@ -49,6 +49,14 @@ a{color:inherit}
 .hero{position:relative;min-height:min(92vh,760px);display:flex;align-items:flex-end;color:var(--hero-ink);
   background:#2b2a1e url("hero.jpg") center 70%/cover no-repeat}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,18,12,.45) 0%,rgba(15,18,12,0) 30%,rgba(15,18,12,.15) 55%,rgba(15,18,12,.78) 100%)}
+.hero-img{display:none}
+@media (min-width:900px){
+  .hero{background:var(--ink);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:stretch;min-height:min(88vh,780px)}
+  .hero::before{display:none}
+  .hero .wrap{grid-column:1;grid-row:1;align-self:center;padding-block:110px 64px!important;max-width:640px;margin:0;margin-inline-start:max(20px,calc((100vw - 1080px)/2 + 20px));padding-inline:0 40px}
+  .hero-img{display:block;grid-column:2;grid-row:1;width:100%;height:0;min-height:100%;object-fit:cover;object-position:center 40%}
+  .hero .wrap h1{font-size:clamp(36px,3.6vw,56px);max-width:16ch}
+}
 .hero .wrap{position:relative;padding-block:120px 56px;width:100%}
 .eyebrow{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;opacity:.92}
 .hero h1{font-size:clamp(40px,7vw,78px);font-weight:300;margin-block:14px 18px;max-width:14ch}
@@ -273,6 +281,7 @@ footer .logo{color:var(--ink)}
 </header>
 <main id="top">
 <section class="hero">
+<img class="hero-img" src="hero.jpg" alt="Beach wedding ceremony with a white arch facing the sea">
 <div class="wrap">
 <div class="eyebrow">Destination Wedding · Cyprus 2027</div>
 <h1><span data-l="en">A Cyprus destination wedding, planned to the last detail</span></h1>
