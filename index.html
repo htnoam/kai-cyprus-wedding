@@ -334,9 +334,14 @@ footer .logo{color:var(--ink)}
 .stay-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
 .stay-seg label{position:relative;display:block;cursor:pointer}
 .stay-seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.stay-seg span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:8px 10px;border-radius:10px;font-weight:600;font-size:14.5px;line-height:1.25;color:var(--muted)}
+.stay-seg span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;min-height:64px;padding:10px 10px;border-radius:10px;line-height:1.25;color:var(--muted)}
+.stay-seg b{font-weight:700;font-size:14.5px}
+.stay-seg small{font-size:12.5px;opacity:.85}
+.stay-seg em{font-style:normal}
 .stay-seg input:checked + span{background:var(--ink);color:var(--bg)}
 .stay-seg input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.price-sub{margin-top:-6px;font-size:14.5px;opacity:.85}
+.price-sub[hidden]{display:none!important}
 .calc-note{font-size:13.5px;opacity:.75}
 .m-cta{display:none}
 @media (max-width:760px){
@@ -511,8 +516,8 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <div class="sh"><div class="kicker">Your price</div><h2>What will your wedding cost?</h2><div class="rule"></div><p>Your complete wedding experience, including accommodation, catering, entertainment and professional wedding planning.</p></div>
 <div class="calc">
 <div class="calc-in">
-<fieldset class="stay-opt"><legend class="field-label">Guest accommodation</legend>
-<div class="stay-seg"><label><input type="radio" name="stay" id="stay-in" value="in" checked><span>Included in our package</span></label><label><input type="radio" name="stay" id="stay-own" value="own"><span>Guests book their own</span></label></div>
+<fieldset class="stay-opt"><legend class="field-label">Choose your package</legend>
+<div class="stay-seg"><label><input type="radio" name="stay" id="stay-own" value="own" checked><span><b>Wedding Package</b><small>Your wedding and your private villa</small></span></label><label><input type="radio" name="stay" id="stay-in" value="in"><span><b>Wedding + Guest Accommodation</b><small>Plus <em id="apts-n">17</em> apartments for your guests</small></span></label></div>
 </fieldset>
 <label class="field-label" for="guests">Number of guests</label>
 <div class="stepper"><button aria-label="Fewer guests" id="minus" type="button">−</button><input id="guests" inputmode="numeric" max="200" min="20" step="1" type="number" value="100"><button aria-label="More guests" id="plus" type="button">+</button></div>
@@ -522,9 +527,10 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <p class="hint cap-note">Packages cover up to 200 guests. Larger celebrations can be arranged on request. <a href="#contact">Contact us for a personalised quotation.</a></p>
 </div>
 <div aria-live="polite" class="calc-out">
-<div class="out-label">Package price</div>
-<div class="total" id="total">€52,000</div>
-<div class="lines"><div class="line"><span>Guests</span><span id="count">100</span></div><div class="line"><span>Accommodation</span><span id="rooms">17 apartments + couple's villa</span></div><div class="line" id="guest-stay-line" hidden><span>Guests' own stay</span><span id="guest-stay">from €57 per person / night</span></div></div>
+<div class="out-label" id="price-label">Wedding package price</div>
+<div class="total" id="total">€40,600</div>
+<p class="price-sub" id="price-sub">Your guests book their own rooms, from €57 per person per night.</p>
+<div class="lines"><div class="line"><span>Guests</span><span id="count">100</span></div><div class="line"><span>Accommodation</span><span id="rooms">Couple's villa included</span></div></div>
 <a class="btn btn-primary calc-enquire" href="#contact" id="enquire">Check Availability for Your Wedding</a>
 <p class="calc-note">Prices are indicative and subject to availability, final guest numbers and selected services.</p>
 </div>
@@ -597,7 +603,7 @@ function setLang(l){
   update();
 }
 
-let guestsOwnStay = false;
+let guestsOwnStay = true;   // default: Wedding Package (guests book their own rooms)
 function priceFor(g){
   return (guestsOwnStay ? CONFIG.pricesNoStay : CONFIG.prices)[g - CONFIG.minGuests] || 0;
 }
@@ -622,7 +628,9 @@ function update(fromRange){
   $("total").textContent = fmt(total);
   $("count").textContent = g;
   if ($("rooms")){ const apts = Math.ceil(Math.max(0, g - 2) / 6); $("rooms").textContent = guestsOwnStay ? "Couple's villa included" : apts + (apts === 1 ? " apartment" : " apartments") + " + couple's villa"; }
-  if ($("guest-stay-line")){ $("guest-stay-line").hidden = !guestsOwnStay; $("guest-stay").textContent = "from €" + CONFIG.guestStayFrom + " per person / night"; }
+  if ($("apts-n")) $("apts-n").textContent = Math.ceil(Math.max(0, g - 2) / 6);
+  if ($("price-label")) $("price-label").textContent = guestsOwnStay ? "Wedding package price" : "Wedding + guest accommodation price";
+  if ($("price-sub")){ $("price-sub").hidden = !guestsOwnStay; $("price-sub").textContent = "Your guests book their own rooms, from €" + CONFIG.guestStayFrom + " per person per night."; }
   const hint = $("guest-hint");
   if (!isNaN(raw) && raw !== g){
     hint.className = "hint warn";
@@ -692,9 +700,9 @@ function waLink(text){ return "https://wa.me/" + CONFIG.whatsapp + "?text=" + en
 let enquiry = null;   // {g, total} carried from the calculator to the contact buttons
 function contactRefresh(){
   let general = lang === "he" ? "שלום KAI EVENTS, אשמח לשמוע על חתונה בריזורט על חוף הים בקפריסין." : "Hi KAI EVENTS, I'd love to hear about a wedding at the beachfront resort in Cyprus.";
-  if (enquiry) general = "Hi KAI EVENTS, I'd like to check availability for our wedding at the beachfront resort in Cyprus.\nGuests: " + enquiry.g + "\nPackage price: " + fmt(enquiry.total) + "\nGuest accommodation: " + (enquiry.own ? "guests book their own" : "included in the package") + "\nPreferred date: ";
+  if (enquiry) general = "Hi KAI EVENTS, I'd like to check availability for our wedding at the beachfront resort in Cyprus.\nGuests: " + enquiry.g + "\nPackage price: " + fmt(enquiry.total) + "\nPackage: " + (enquiry.own ? "Wedding Package (guests book their own rooms)" : "Wedding + Guest Accommodation") + "\nPreferred date: ";
   $("c-sel").hidden = !enquiry;
-  if (enquiry) $("c-sel").textContent = "Your selection: " + enquiry.g + " guests · " + fmt(enquiry.total) + " package price" + (enquiry.own ? " (guests book their own stay)" : "");
+  if (enquiry) $("c-sel").textContent = "Your selection: " + enquiry.g + " guests · " + fmt(enquiry.total) + " · " + (enquiry.own ? "Wedding Package" : "Wedding + Guest Accommodation");
   $("c-wa").href = waLink(general); $("wa-float").href = waLink(general);
   $("c-mail").href = "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent(enquiry ? "Wedding availability: " + enquiry.g + " guests" : (lang === "he" ? "חתונה בקפריסין" : "Wedding in Cyprus")) + (enquiry ? "&body=" + encodeURIComponent(general) : "");
 }
@@ -735,7 +743,7 @@ function syncCalc(){
   if (!$("f-guests").value.trim()) $("f-guests").value = enquiry.g;   // never overwrite what the visitor typed
   $("f-calc-guests").value = enquiry.g;
   $("f-calc-price").value = fmt(enquiry.total);
-  $("f-calc-stay").value = enquiry.own ? "Guests book their own" : "Included in package";
+  $("f-calc-stay").value = enquiry.own ? "Wedding Package (guests book their own rooms)" : "Wedding + Guest Accommodation";
 }
 $("enquire").addEventListener("click", syncCalc);
 form.addEventListener("submit", async e => {
