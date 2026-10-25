@@ -491,7 +491,7 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <div aria-live="polite" class="calc-out">
 <div class="out-label" id="price-label">Wedding package price</div>
 <div class="total" id="total">€40,600</div>
-<p class="price-sub" id="price-sub">Your guests book their own rooms, from €57 per person per night.</p>
+<p class="price-sub" id="price-sub">Your guests book their own rooms.</p>
 <div class="lines"><div class="line"><span>Guests</span><span id="count">100</span></div><div class="line"><span>Accommodation</span><span id="rooms">Couple's villa included</span></div></div>
 <a class="btn btn-primary calc-enquire" href="#contact" id="enquire">Check Availability for Your Wedding</a>
 <p class="calc-note">Prices are indicative and subject to availability, final guest numbers and selected services.</p>
@@ -583,7 +583,6 @@ const CONFIG = {
   prices: [23700,24300,24600,24800,25100,25400,25700,26300,26500,26800,27100,27400,27600,28300,28500,28800,29100,29300,29600,30300,30500,30800,31100,31300,31600,32300,32500,32800,33000,33300,33600,34200,34400,34700,34900,35200,35500,36100,36300,36600,36800,37100,37300,38000,38200,38400,38700,39000,39200,39900,40100,40400,40700,41000,41300,42000,42200,42600,42900,43200,43500,44200,44500,44900,45200,45600,46000,46700,47000,47400,47700,48100,48400,49200,49500,49800,50200,50600,50900,51700,52000,52200,52400,52600,52800,53300,53500,53700,53900,54100,54300,54900,55000,55200,55400,55600,55800,56400,56500,56700,56900,57100,57300,57900,58000,58200,58400,58600,58800,59400,59600,59800,60000,60200,60400,60900,61100,61300,61500,61700,61900,62500,62600,62800,63000,63200,63400,64000,64100,64300,64500,64700,64900,65500,65600,65800,66000,66200,66400,67000,67200,67400,67600,67800,68000,68500,68700,68900,69100,69300,69500,70100,70200,70400,70600,70800,71000,71600,71700,71900,72100,72300,72500,73100,73200,73400,73600,73800,74000,74600,74800,75000,75200,75400,75600,76100,76300,76500,76700,76900,77100],
   // Package price per guest count when guests book their own stay (same profit; couple's villa still included)
   pricesNoStay: [21600,21900,22100,22300,22500,22700,22900,23200,23400,23600,23800,24000,24200,24500,24700,24900,25100,25300,25500,25800,26000,26200,26400,26600,26800,27100,27300,27500,27700,27900,28100,28300,28500,28700,28900,29100,29300,29500,29700,29900,30100,30300,30500,30700,30900,31100,31300,31500,31700,31900,32100,32400,32600,32900,33100,33400,33600,33900,34100,34400,34600,34900,35200,35500,35800,36100,36400,36700,37000,37300,37600,37900,38200,38500,38800,39100,39400,39700,40000,40300,40600,40800,40900,41100,41200,41300,41500,41600,41800,41900,42000,42200,42300,42500,42600,42700,42900,43000,43200,43300,43400,43600,43700,43900,44000,44100,44300,44400,44600,44700,44800,45000,45100,45300,45400,45500,45700,45800,46000,46100,46200,46400,46500,46700,46800,46900,47100,47200,47400,47500,47600,47800,47900,48100,48200,48300,48500,48600,48800,48900,49000,49200,49300,49500,49600,49700,49900,50000,50200,50300,50400,50600,50700,50900,51000,51100,51300,51400,51600,51700,51800,52000,52100,52300,52400,52500,52700,52800,53000,53100,53200,53400,53500,53700,53800,53900,54100,54200,54400,54500,54600],
-  guestStayFrom: 57,       // € per person per night, 6 guests sharing an apartment
   minGuests: 20,
   maxGuests: 200,
   guestsPerSuite: 6,       // guests per apartment/villa
@@ -634,7 +633,7 @@ function update(fromRange){
   if ($("rooms")){ const apts = Math.ceil(Math.max(0, g - 2) / 6); $("rooms").textContent = guestsOwnStay ? "Couple's villa included" : apts + (apts === 1 ? " apartment" : " apartments") + " + couple's villa"; }
   if ($("apts-n")) $("apts-n").textContent = Math.ceil(Math.max(0, g - 2) / 6);
   if ($("price-label")) $("price-label").textContent = guestsOwnStay ? "Wedding package price" : "Wedding + guest accommodation price";
-  if ($("price-sub")){ $("price-sub").hidden = !guestsOwnStay; $("price-sub").textContent = "Your guests book their own rooms, from €" + CONFIG.guestStayFrom + " per person per night."; }
+  if ($("price-sub")){ $("price-sub").hidden = !guestsOwnStay; $("price-sub").textContent = "Your guests book their own rooms."; }
   const hint = $("guest-hint");
   if (!isNaN(raw) && raw !== g){
     hint.className = "hint warn";
