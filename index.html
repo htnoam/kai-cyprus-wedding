@@ -328,6 +328,7 @@ footer .logo{color:var(--ink)}
 .gallery3 img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius);display:block}
 @media (max-width:760px){.gallery3{grid-template-columns:1fr 1fr}.gallery3 img:first-child{grid-column:1/-1;aspect-ratio:4/3}}
 .about-line{max-width:64ch;margin:6px 0 4px;font-family:var(--display);font-size:clamp(19px,2.2vw,23px);line-height:1.45}
+.lines .line span:last-child#rooms{white-space:normal;text-align:end}
 .calc-note{font-size:13.5px;opacity:.75}
 .m-cta{display:none}
 @media (max-width:760px){
@@ -512,7 +513,7 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <div aria-live="polite" class="calc-out">
 <div class="out-label">Package price</div>
 <div class="total" id="total">€52,000</div>
-<div class="lines"><div class="line"><span>Guests</span><span id="count">100</span></div></div>
+<div class="lines"><div class="line"><span>Guests</span><span id="count">100</span></div><div class="line"><span>Accommodation</span><span id="rooms">17 apartments + couple's villa</span></div></div>
 <a class="btn btn-primary calc-enquire" href="#contact" id="enquire">Check Availability for Your Wedding</a>
 <p class="calc-note">Prices are indicative and subject to availability, final guest numbers and selected services.</p>
 </div>
@@ -604,6 +605,7 @@ function update(fromRange){
   if (fromRange || document.activeElement !== $("guests")) $("guests").value = g;
   $("total").textContent = fmt(total);
   $("count").textContent = g;
+  if ($("rooms")){ const apts = Math.ceil(Math.max(0, g - 2) / 6); $("rooms").textContent = apts + (apts === 1 ? " apartment" : " apartments") + " + couple's villa"; }
   const hint = $("guest-hint");
   if (!isNaN(raw) && raw !== g){
     hint.className = "hint warn";
