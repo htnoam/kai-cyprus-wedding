@@ -354,7 +354,12 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 .nav{display:flex;gap:22px;font-size:14px;letter-spacing:.06em}
 .nav a{color:#fff;text-decoration:none;opacity:.9}
 .nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
-@media (max-width:899px){.nav{display:none}}
+@media (max-width:999px){.nav{display:none}}
+@media (min-width:900px){
+  .bar .wrap{max-width:none;padding-inline:max(20px,calc((100vw - 1080px)/2 + 20px)) 36px}
+  .nav a{text-shadow:0 1px 10px rgba(0,0,0,.45)}
+}
+@media (min-width:900px) and (max-width:1200px){.nav{gap:16px;font-size:13.5px}}
 /* resort */
 .resort-img{border-radius:var(--radius);overflow:hidden;max-width:1000px;margin-inline:auto}
 .resort-img img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
