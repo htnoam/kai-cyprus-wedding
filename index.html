@@ -396,7 +396,7 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 @media (max-width:640px){.facts3{grid-template-columns:1fr}.facts3 div + div{border-inline-start:0;border-top:1px solid var(--line)}}
 /* stay */
 .units3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.u{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.u{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;grid-template-rows:auto 1fr}
 .u img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
 .u-body{padding:20px 20px 22px;display:grid;gap:10px;align-content:start;text-align:center}
 .u-tag{justify-self:center;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
@@ -406,7 +406,7 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 .u ul{margin:4px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
 .u li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px;font-variant-numeric:tabular-nums}
 @media (max-width:860px){.units3{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:-20px;padding:0 20px 8px;scroll-padding-inline:20px}.u{flex:0 0 82%;scroll-snap-align:start}}
-.buyout{max-width:760px;margin:28px auto 0;text-align:center;padding:16px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg);font-size:15.5px;color:var(--muted)}
+.buyout{max-width:1000px;margin:24px auto 0;text-align:center;padding:16px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg);font-size:15.5px;color:var(--muted)}
 .buyout b{color:var(--ink)}
 .buyout a{color:var(--accent);font-weight:700}
 /* wedding */
@@ -453,7 +453,7 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <body>
 
 <header class="bar"><div class="wrap"><a class="logo" href="#top">KAI EVENTS</a>
-<nav class="nav" aria-label="Sections"><a href="#resort">The resort</a><a href="#stay">Your stay</a><a href="#wedding">The wedding</a><a href="#calculator">Price</a><a href="#contact">Contact</a></nav></div></header>
+<nav class="nav" aria-label="Sections"><a href="#resort">The resort</a><a href="#calculator">Price</a><a href="#stay">Your stay</a><a href="#wedding">The wedding</a><a href="#contact">Contact</a></nav></div></header>
 <main id="top">
 <section class="hero" id="top-hero">
 <img class="hero-img" src="img/hero.jpg" alt="Bride and groom under a flower arch by the sea">
@@ -470,48 +470,7 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <div class="sh"><div class="kicker">The resort</div><h2>A private beach on the Cyprus coast</h2><div class="rule"></div><p>Luxury apartments and villas around a large pool, with a private beach for your ceremony and celebrations.</p></div>
 <div class="resort-img"><img src="img/resort.jpg" alt="Aerial view of the beachfront resort, its villas and private beach" loading="lazy"></div>
 <div class="facts3"><div><b>20 min</b><span>from Larnaca Airport</span></div><div><b>Private beach</b><span>and a large swimming pool</span></div><div><b>Up to 200</b><span>guests on the beach</span></div></div>
-</div>
-</section>
-
-<section class="s alt" id="stay">
-<div class="wrap">
-<div class="sh"><div class="kicker">Accommodation</div><h2>Your stay by the sea</h2><div class="rule"></div><p>Your guests stay in luxury apartments. The two of you stay in a sea-view villa with a private pool.</p></div>
-<div class="units3">
-<article class="u"><img src="img/apartment.jpg" alt="Luxury apartment with garden terrace" loading="lazy"><div class="u-body"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="u-tag on">Included for guests</span></div><h3>Luxury Apartments</h3><p>Spacious apartments with garden and pool views.</p><ul><li>3 bedrooms</li><li>1 shower · 2 toilets</li><li>Approx. 110 m²</li><li>Up to 6 guests</li><li>Garden or balcony</li></ul></div></article>
-<article class="u"><img src="img/seaview.jpg" alt="Sea-view villas with private gardens" loading="lazy"><div class="u-body"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="u-tag">Upgrade, ask us</span></div><h3>Sea View Villas</h3><p>Villas with side sea views and private gardens.</p><ul><li>3 bedrooms</li><li>3 showers · 4 toilets</li><li>Approx. 180 m²</li><li>Up to 6 guests</li><li>Side sea view</li></ul></div></article>
-<article class="u"><img src="img/poolvilla.jpg" alt="Villa with a private pool and terrace" loading="lazy"><div class="u-body"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="u-tag on">Included for the couple</span><span class="u-tag">Upgrade for guests</span></div><h3>Private Pool Villas</h3><p>Villas with a private pool and sea view.</p><ul><li>3 bedrooms</li><li>3 showers · 4 toilets</li><li>Approx. 200 m²</li><li>Up to 6 guests</li><li>Private swimming pool</li></ul></div></article>
-</div>
 <p class="buyout"><b>Full buyout available.</b> The resort can be booked exclusively for your wedding, just you and your guests. <a href="#contact">Ask us</a></p>
-</div>
-</section>
-
-<section class="s" id="wedding">
-<div class="wrap">
-<div class="sh"><div class="kicker">The wedding</div><h2>Three days, everything taken care of</h2><div class="rule"></div><p>From the moment you land to the last dance, we plan and run every detail.</p></div>
-<div class="days3">
-<div class="d"><div class="n">Day 1</div><h3>Arrival</h3><ul><li>Group airport transfer</li><li>Check-in to your apartments and villa</li><li>A free evening at the resort</li></ul></div>
-<div class="d"><div class="n">Day 2</div><h3>The wedding</h3><ul><li>Bridal hair and makeup</li><li>Photographer, up to 8 hours</li><li>Ceremony under a flower arch</li><li>Buffet dinner, choice of 2 menus</li><li>6 hours of drinks</li><li>DJ, with music until 11:30 PM</li></ul></div>
-<div class="d"><div class="n">Day 3</div><h3>Departure</h3><ul><li>Breakfast at the resort</li><li>Group airport transfer</li></ul></div>
-</div>
-<div class="incl">
-<div class="incl-head">Included in your price</div>
-<div class="incl-grid"><div><b>2 nights</b><span>Accommodation for all your guests</span></div><div><b>Breakfast</b><span>Every morning at the resort</span></div><div><b>DJ</b><span>For the wedding evening</span></div><div><b>Photographer</b><span>On the wedding day, up to 8 hours</span></div><div><b>Hair &amp; makeup</b><span>For the bride</span></div><div><b>Wedding design</b><span>Tables and ceremony</span></div><div><b>Furniture &amp; equipment</b><span>Tables, chairs and everything needed</span></div><div><b>Sound &amp; lighting</b><span>For the ceremony and celebration</span></div></div>
-</div>
-<div class="photos4">
-<img src="img/lights.jpg" alt="Wedding dinner under fairy lights" loading="lazy">
-<img src="img/arch.jpg" alt="Beach ceremony aisle facing the sea" loading="lazy">
-<img src="img/table.jpg" alt="Wedding table with white flowers" loading="lazy">
-<img src="img/beach-table.jpg" alt="Beach dinner table with flowers" loading="lazy">
-<img src="img/garden.jpg" alt="Long table in the garden by the sea" loading="lazy">
-</div>
-<p class="addon"><b>Want one more evening together?</b> Add a taverna night with a live band. Ask us.</p>
-<details class="menus-more"><summary>See the menus</summary>
-<div class="mn" id="menus">
-<div class="mn-tabs"><div class="mn-seg" id="mn-tabs" role="tablist"></div></div>
-<div class="mn-card" dir="ltr" id="mn-card"></div>
-<p class="mn-legend"><span class="mn-v">V</span> = vegetarian</p>
-</div>
-</details>
 </div>
 </section>
 
@@ -542,8 +501,50 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 </div>
 </section>
 
+<section class="s" id="stay">
+<div class="wrap">
+<div class="sh"><div class="kicker">Accommodation</div><h2>Your stay by the sea</h2><div class="rule"></div><p>Your guests stay in luxury apartments. The two of you stay in a sea-view villa with a private pool.</p></div>
+<div class="units3">
+<article class="u"><img src="img/apartment.jpg" alt="Luxury apartment with garden terrace" loading="lazy"><div class="u-body"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="u-tag on">Included for guests</span></div><h3>Luxury Apartments</h3><p>Spacious apartments with garden and pool views.</p><ul><li>3 bedrooms</li><li>1 shower · 2 toilets</li><li>Approx. 110 m²</li><li>Up to 6 guests</li><li>Garden or balcony</li></ul></div></article>
+<article class="u"><img src="img/seaview.jpg" alt="Sea-view villas with private gardens" loading="lazy"><div class="u-body"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="u-tag">Upgrade, ask us</span></div><h3>Sea View Villas</h3><p>Villas with side sea views and private gardens.</p><ul><li>3 bedrooms</li><li>3 showers · 4 toilets</li><li>Approx. 180 m²</li><li>Up to 6 guests</li><li>Side sea view</li></ul></div></article>
+<article class="u"><img src="img/poolvilla.jpg" alt="Villa with a private pool and terrace" loading="lazy"><div class="u-body"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="u-tag on">Included for the couple</span><span class="u-tag">Upgrade for guests</span></div><h3>Private Pool Villas</h3><p>Villas with a private pool and sea view.</p><ul><li>3 bedrooms</li><li>3 showers · 4 toilets</li><li>Approx. 200 m²</li><li>Up to 6 guests</li><li>Private swimming pool</li></ul></div></article>
+</div>
+</div>
+</section>
 
-<section class="s alt" id="contact">
+<section class="s alt" id="wedding">
+<div class="wrap">
+<div class="sh"><div class="kicker">The wedding</div><h2>Three days, everything taken care of</h2><div class="rule"></div><p>From the moment you land to the last dance, we plan and run every detail.</p></div>
+<div class="days3">
+<div class="d"><div class="n">Day 1</div><h3>Arrival</h3><ul><li>Group airport transfer</li><li>Check-in to your apartments and villa</li><li>A free evening at the resort</li></ul></div>
+<div class="d"><div class="n">Day 2</div><h3>The wedding</h3><ul><li>Bridal hair and makeup</li><li>Photographer, up to 8 hours</li><li>Ceremony under a flower arch</li><li>Buffet dinner, choice of 2 menus</li><li>6 hours of drinks</li><li>DJ, with music until 11:30 PM</li></ul></div>
+<div class="d"><div class="n">Day 3</div><h3>Departure</h3><ul><li>Breakfast at the resort</li><li>Group airport transfer</li></ul></div>
+</div>
+<div class="incl">
+<div class="incl-head">Included in your price</div>
+<div class="incl-grid"><div><b>2 nights</b><span>Accommodation for all your guests</span></div><div><b>Breakfast</b><span>Every morning at the resort</span></div><div><b>DJ</b><span>For the wedding evening</span></div><div><b>Photographer</b><span>On the wedding day, up to 8 hours</span></div><div><b>Hair &amp; makeup</b><span>For the bride</span></div><div><b>Wedding design</b><span>Tables and ceremony</span></div><div><b>Furniture &amp; equipment</b><span>Tables, chairs and everything needed</span></div><div><b>Sound &amp; lighting</b><span>For the ceremony and celebration</span></div></div>
+</div>
+<div class="photos4">
+<img src="img/lights.jpg" alt="Wedding dinner under fairy lights" loading="lazy">
+<img src="img/arch.jpg" alt="Beach ceremony aisle facing the sea" loading="lazy">
+<img src="img/table.jpg" alt="Wedding table with white flowers" loading="lazy">
+<img src="img/beach-table.jpg" alt="Beach dinner table with flowers" loading="lazy">
+<img src="img/garden.jpg" alt="Long table in the garden by the sea" loading="lazy">
+</div>
+<p class="addon"><b>Want one more evening together?</b> Add a taverna night with a live band. Ask us.</p>
+<details class="menus-more"><summary>See the menus</summary>
+<div class="mn" id="menus">
+<div class="mn-tabs"><div class="mn-seg" id="mn-tabs" role="tablist"></div></div>
+<div class="mn-card" dir="ltr" id="mn-card"></div>
+<p class="mn-legend"><span class="mn-v">V</span> = vegetarian</p>
+</div>
+</details>
+</div>
+</section>
+
+
+
+<section class="s" id="contact">
 <div class="wrap">
 <div class="sh"><div class="kicker">Contact</div><h2>Let’s Plan Your Cyprus Wedding</h2><div class="rule"></div><p>KAI Events plans and produces destination weddings, with close guidance from day one and our team with you for the whole stay. Tell us a little about your plans.</p></div>
 <p class="contact-sel" hidden id="c-sel"></p>
