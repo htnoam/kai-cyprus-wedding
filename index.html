@@ -585,7 +585,7 @@ const CONFIG = {
   guestsPerSuite: 6,       // guests per apartment/villa
   whatsapp: "972528344374",   // country code + number, digits only (not shown on the page)
   email: "htnoam@gmail.com",
-  formEndpoint: ""   // Google Apps Script web app URL that receives enquiries
+  formEndpoint: "https://formsubmit.co/ajax/htnoam@gmail.com"   // FormSubmit forwards each enquiry to this email
 };
 // =================================
 
@@ -757,11 +757,24 @@ form.addEventListener("submit", async e => {
   btn.disabled = true; btn.textContent = "Sending…";
   try {
     if (!CONFIG.formEndpoint) throw new Error("not_configured");
-    const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 20000);
-    const res = await fetch(CONFIG.formEndpoint, { method: "POST", body: JSON.stringify(data), signal: ctrl.signal });
-    clearTimeout(t);
-    const out = await res.json();
-    if (!res.ok || !out.ok) throw new Error(out.error || "failed");
+    if (!data.company){   // spam trap: bots fill the hidden field, people don't; bots get a silent "success"
+      const dash = v => (v && String(v).trim()) || "–";
+      const payload = {
+        _subject: "New wedding enquiry: " + data.name + ", " + data.guests + " guests",
+        _template: "table", _captcha: "false",
+        name: data.name, email: data.email,
+        "Phone": dash(data.phone), "Preferred date": dash(data.date), "Guests": data.guests,
+        "Budget": dash(data.budget), "Message": dash(data.message),
+        "Calculator guests": dash(data.calcGuests), "Calculator price": dash(data.calcPrice),
+        "Package": dash(data.calcStay), "Page": data.page
+      };
+      const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 20000);
+      const res = await fetch(CONFIG.formEndpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload), signal: ctrl.signal });
+      clearTimeout(t);
+      const out = await res.json().catch(() => ({}));
+      const ok = res.ok && (out.success === true || out.success === "true");
+      if (!ok) throw new Error(out.message || "failed");
+    }
     form.hidden = true;
     $("ef-done").hidden = false;
     $("ef-done").scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
