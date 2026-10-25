@@ -360,6 +360,17 @@ section.s{padding-block:clamp(64px,9vw,104px)}
   .nav a{text-shadow:0 1px 10px rgba(0,0,0,.45)}
 }
 @media (min-width:900px) and (max-width:1200px){.nav{gap:16px;font-size:13.5px}}
+/* sticky menu (computers) */
+@media (min-width:1000px){
+  html{scroll-padding-top:72px}
+  .bar{position:fixed;transition:background-color .25s, box-shadow .25s}
+  .bar .wrap{transition:padding .25s}
+  .bar.stuck{background:var(--ink);box-shadow:0 8px 24px -16px rgba(0,0,0,.6)}
+  .bar.stuck .wrap{padding-block:14px}
+  .bar.stuck .nav a{text-shadow:none}
+  .nav a.on{opacity:1;color:var(--accent)}
+}
+@media (prefers-reduced-motion: reduce){.bar,.bar .wrap{transition:none}}
 /* resort */
 .resort-img{border-radius:var(--radius);overflow:hidden;max-width:1000px;margin-inline:auto}
 .resort-img img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
@@ -737,6 +748,18 @@ form.addEventListener("submit", async e => {
   const bar = $("m-cta"); const seen = new Set();
   const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? seen.add(e.target.id) : seen.delete(e.target.id)); bar.classList.toggle("off", seen.size > 0); }, { threshold: 0.15 });
   ["top-hero","calculator","contact"].forEach(id => io.observe($(id)));
+})();
+
+// ===== Sticky menu: solid once past the hero, and highlight the section on screen
+(function(){
+  const bar = document.querySelector(".bar"), hero = $("top-hero");
+  const setStuck = () => bar.classList.toggle("stuck", hero.getBoundingClientRect().bottom < 80);
+  addEventListener("scroll", setStuck, { passive: true }); setStuck();
+  const links = [...document.querySelectorAll(".nav a")];
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  links.forEach(a => { const t = document.querySelector(a.getAttribute("href")); if (t) io.observe(t); });
 })();
 </script>
 </body>
