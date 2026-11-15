@@ -448,6 +448,13 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 #contact .ef,#contact .ef-done{max-width:760px}
 #contact .contact-alt{justify-content:center}
 #contact .contact-sel{display:block;width:max-content;max-width:100%}
+/* cookie consent */
+.consent{position:fixed;inset-inline:12px;bottom:12px;z-index:60;max-width:640px;margin-inline:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;font-size:14px;line-height:1.45}
+.consent[hidden]{display:none}
+.consent p{margin:0;flex:1 1 260px}
+.consent .cb{display:flex;gap:8px}
+.consent button{font:inherit;font-weight:600;border-radius:999px;padding:8px 16px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink)}
+.consent button.ok{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -575,6 +582,25 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <a aria-label="WhatsApp" class="wa-float" href="#" id="wa-float" rel="noopener" target="_blank"><svg aria-hidden="true" height="22" viewbox="0 0 24 24" width="22"><path d="M12 3C7 3 3 6.6 3 11c0 2.2 1 4.2 2.7 5.6L5 21l4.3-2.2c.9.2 1.8.3 2.7.3 5 0 9-3.6 9-8s-4-8-9-8z" fill="currentColor"></path></svg><span>WhatsApp</span></a>
 <a class="m-cta" href="#calculator" id="m-cta">See your wedding price</a>
 <footer><div class="wrap"><span class="logo">KAI EVENTS</span><span>Destination wedding production in Cyprus</span></div></footer>
+<div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden><p>We use cookies to measure how our adverts perform. You can accept or decline.</p><div class="cb"><button type="button" id="consent-no">Decline</button><button type="button" class="ok" id="consent-yes">Accept</button></div></div>
+<script>
+// ===== Meta Pixel: loads only after the visitor accepts cookies =====
+(function(){
+  const PIXEL_ID = "1123631364443028", KEY = "kai_cookie_consent";
+  const get = () => { try { return localStorage.getItem(KEY); } catch(e){ return null; } };
+  const set = v => { try { localStorage.setItem(KEY, v); } catch(e){} };
+  function loadPixel(){
+    if (window.fbq) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq("init", PIXEL_ID); fbq("track", "PageView");
+  }
+  window.kaiTrack = (type, name, params) => { if (window.fbq) fbq(type, name, params || {}); };
+  const box = document.getElementById("consent"), c = get();
+  if (c === "yes") loadPixel(); else if (c !== "no") box.hidden = false;
+  document.getElementById("consent-yes").addEventListener("click", () => { set("yes"); box.hidden = true; loadPixel(); });
+  document.getElementById("consent-no").addEventListener("click", () => { set("no"); box.hidden = true; });
+})();
+</script>
 
 <script>
 // ===== Settings: edit these =====
@@ -656,6 +682,9 @@ function update(fromRange){
 $("guests").addEventListener("input", () => update(false));
 $("guests").addEventListener("change", () => { $("guests").value = clamp(parseInt($("guests").value,10)); update(false); });
 $("guests-range").addEventListener("input", () => update(true));
+// calculator use (secondary signal, not a lead): sent once per visit
+let calcUsed = false;
+["guests-range","guests","minus","plus","stay-own","stay-in"].forEach(id => $(id).addEventListener(id === "minus" || id === "plus" ? "click" : "change", () => { if (calcUsed) return; calcUsed = true; window.kaiTrack && kaiTrack("trackCustom", "CalculatorUse"); }));
 $("minus").addEventListener("click", () => { $("guests").value = clamp(parseInt($("guests").value,10) - 1); update(false); });
 $("plus").addEventListener("click", () => { $("guests").value = clamp(parseInt($("guests").value,10) + 1); update(false); });
 document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.set)));
@@ -777,6 +806,7 @@ form.addEventListener("submit", async e => {
       const out = await res.json().catch(() => ({}));
       const ok = res.ok && (out.success === true || out.success === "true");
       if (!ok) throw new Error(out.message || "failed");
+      window.kaiTrack && kaiTrack("track", "Lead", { content_name: "Atlantis Gardens wedding enquiry" });   // only after a confirmed real send
     }
     form.hidden = true;
     $("ef-done").hidden = false;
