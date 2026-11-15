@@ -559,6 +559,7 @@ section.s{padding-block:clamp(64px,9vw,104px)}
 <div class="ef-field"><label for="f-name">Full name <span class="req">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
 <div class="ef-field"><label for="f-email">Email address <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
 <div class="ef-field"><label for="f-phone">Phone number <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+44 7700 900123"></div>
+<div class="ef-field"><label for="f-year">Wedding year <span class="opt">(optional)</span></label><select id="f-year" name="year"><option value="">Choose a year</option><option>2027</option><option>2028</option><option>Not sure yet</option></select></div>
 <div class="ef-field"><label for="f-date">Preferred wedding date <span class="opt">(optional)</span></label><input id="f-date" name="date" type="date"></div>
 <div class="ef-field"><label for="f-guests">Estimated number of guests <span class="req">*</span></label><input id="f-guests" name="guests" type="number" inputmode="numeric" min="1" step="1" required></div>
 <div class="ef-field"><label for="f-budget">Estimated budget <span class="opt">(optional)</span></label><select id="f-budget" name="budget"><option value="">Choose a range</option><option>Under €30,000</option><option>€30,000–€40,000</option><option>€40,000–€50,000</option><option>€50,000–€70,000</option><option>€70,000+</option><option>Not sure yet</option></select></div>
@@ -795,7 +796,7 @@ form.addEventListener("submit", async e => {
         _subject: "New wedding enquiry: " + data.name + ", " + data.guests + " guests",
         _template: "table", _captcha: "false",
         name: data.name, email: data.email,
-        "Phone": dash(data.phone), "Preferred date": dash(data.date), "Guests": data.guests,
+        "Phone": dash(data.phone), "Wedding year": dash(data.year), "Preferred date": dash(data.date), "Guests": data.guests,
         "Budget": dash(data.budget), "Message": dash(data.message),
         "Calculator guests": dash(data.calcGuests), "Calculator price": dash(data.calcPrice),
         "Package": dash(data.calcStay), "Page": data.page
