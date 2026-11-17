@@ -615,7 +615,7 @@ const CONFIG = {
   guestsPerSuite: 6,       // guests per apartment/villa
   whatsapp: "972528344374",   // country code + number, digits only (not shown on the page)
   email: "htnoam@gmail.com",
-  formEndpoint: "https://formsubmit.co/ajax/htnoam@gmail.com"   // FormSubmit forwards each enquiry to this email
+  formEndpoint: "https://formspree.io/f/mjywwavr"   // Formspree forwards each enquiry to Noam's email
 };
 // =================================
 
@@ -794,7 +794,6 @@ form.addEventListener("submit", async e => {
       const dash = v => (v && String(v).trim()) || "–";
       const payload = {
         _subject: "New wedding enquiry: " + data.name + ", " + data.guests + " guests",
-        _template: "table", _captcha: "false",
         name: data.name, email: data.email,
         "Phone": dash(data.phone), "Wedding year": dash(data.year), "Preferred date": dash(data.date), "Guests": data.guests,
         "Budget": dash(data.budget), "Message": dash(data.message),
@@ -805,7 +804,7 @@ form.addEventListener("submit", async e => {
       const res = await fetch(CONFIG.formEndpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload), signal: ctrl.signal });
       clearTimeout(t);
       const out = await res.json().catch(() => ({}));
-      const ok = res.ok && (out.success === true || out.success === "true");
+      const ok = res.ok && out.ok === true;
       if (!ok) throw new Error(out.message || "failed");
       window.kaiTrack && kaiTrack("track", "Lead", { content_name: "Atlantis Gardens wedding enquiry" });   // only after a confirmed real send
     }
